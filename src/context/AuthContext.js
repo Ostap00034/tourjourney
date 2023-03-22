@@ -4,8 +4,8 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
-	signInWithPopup,
 	GoogleAuthProvider,
+	signInWithRedirect,
 } from 'firebase/auth'
 import { auth } from '../firebase/config/firebase'
 
@@ -41,14 +41,13 @@ export const AuthContextProvider = ({ children }) => {
 	}
 
 	const signInWithGoogle = () => {
-		return signInWithPopup(auth, provider)
+		return signInWithRedirect(auth, provider)
 			.then(result => {
-				// This gives you a Google Access Token. You can use it to access the Google API.
 				const credential = GoogleAuthProvider.credentialFromResult(result)
 				const token = credential.accessToken
-				// The signed-in user info.
 				const user = result.user
 				// IdP data available using getAdditionalUserInfo(result)
+				console.log('sdlfkjsalkdfjasdlk;fj')
 				console.log(getAdditionalUserInfo(result))
 			})
 			.catch(error => {

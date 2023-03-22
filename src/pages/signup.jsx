@@ -11,6 +11,10 @@ const Signup = () => {
 		password: '',
 	})
 
+	if (user) {
+		router.push('/')
+	}
+
 	const handleSignup = async e => {
 		e.preventDefault()
 

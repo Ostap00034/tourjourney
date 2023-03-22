@@ -12,6 +12,10 @@ const Login = () => {
 		password: '',
 	})
 
+	if (user) {
+		router.push('/')
+	}
+
 	const handleLogin = async e => {
 		e.preventDefault()
 
@@ -80,8 +84,9 @@ const Login = () => {
 					Войти
 				</button>
 				<button
-					onClick={async () => {
-						const res = await signInWithGoogle()
+					type='button'
+					onClick={() => {
+						const res = signInWithGoogle()
 						console.log(res)
 					}}>
 					Войти через гугл
