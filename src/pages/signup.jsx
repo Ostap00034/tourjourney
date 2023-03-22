@@ -9,6 +9,7 @@ const Signup = () => {
 	const [data, setData] = useState({
 		email: '',
 		password: '',
+		country: '',
 	})
 
 	if (user) {
@@ -60,6 +61,22 @@ const Signup = () => {
 						})
 					}
 					value={data.email}
+				/>
+				<label className='font-inter text-[14px] leading-[20px] font-medium mb-[8px]'>
+					Страна
+				</label>
+				<input
+					className='rounded-[8px] border-[1px] mb-[16px] border-black min-w-[360px] h-[44px] px-[12px] font-inter placeholder:font-inter placeholder:text-black font-normal text-[16px] leading-[24px] placeholder:leading-[24px]'
+					type='text'
+					placeholder='Введите страну'
+					required
+					onChange={e =>
+						setData({
+							...data,
+							country: e.target.value,
+						})
+					}
+					value={data.country}
 				/>
 				<label className='font-inter text-[14px] leading-[20px] font-medium mb-[8px]'>
 					Пароль
