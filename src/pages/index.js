@@ -19,7 +19,7 @@ const Home = () => {
 			}
 		})
 		setDatas(arr)
-	})
+	}, [])
 	const { user } = useAuth()
 	return (
 		<>

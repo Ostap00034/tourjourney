@@ -9,10 +9,12 @@ const Nav = () => {
 
 	return (
 		<nav className='bg-red-500'>
-			<div className='flex flex-row justify-around px-10 py-5'>
-				<Link href='/'>Главная</Link>
+			<div className='flex flex-row justify-around hx-10 hy-5'>
+				<h onClick={() => router.push('/')} className='cursor-pointer'>
+					Главная
+				</h>
 				{user ? (
-					<div>
+					<div className='flex flex-row gap-[12px]'>
 						<a
 							className='cursor-pointer'
 							onClick={() => {
@@ -21,11 +23,25 @@ const Nav = () => {
 							}}>
 							Выйти
 						</a>
+						<h onClick={() => router.push('/bases')} className='cursor-pointer'>
+							Турбазы
+						</h>
+						<h
+							onClick={() => router.push('/addBase')}
+							className='cursor-pointer'>
+							Добавление турбазы
+						</h>
 					</div>
 				) : (
 					<>
-						<Link href='/signup'>Регистрация</Link>
-						<Link href='/login'>Авторизация</Link>
+						<h
+							onClick={() => router.push('/signuh')}
+							className='cursor-pointer'>
+							Регистрация
+						</h>
+						<h onClick={() => router.push('/login')} className='cursor-pointer'>
+							Авторизация
+						</h>
 					</>
 				)}
 			</div>
