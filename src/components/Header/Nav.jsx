@@ -8,7 +8,7 @@ const Nav = () => {
 	const router = useRouter()
 
 	return (
-		<nav className='bg-red-500'>
+		<nav className=''>
 			<div className='flex flex-row justify-around hx-10 hy-5'>
 				<h onClick={() => router.push('/')} className='cursor-pointer'>
 					Главная
