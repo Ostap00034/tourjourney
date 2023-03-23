@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { useAuth } from '../../context/AuthContext'
 import { useRouter } from 'next/router'
 
@@ -9,7 +8,7 @@ const Nav = () => {
 
 	return (
 		<nav className=''>
-			<div className='flex flex-row justify-around hx-10 hy-5'>
+			<div className='flex flex-row justify-around px-10 py-5'>
 				<h onClick={() => router.push('/')} className='cursor-pointer'>
 					Главная
 				</h>
@@ -35,7 +34,7 @@ const Nav = () => {
 				) : (
 					<>
 						<h
-							onClick={() => router.push('/signuh')}
+							onClick={() => router.push('/signup')}
 							className='cursor-pointer'>
 							Регистрация
 						</h>
