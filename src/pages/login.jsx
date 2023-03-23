@@ -29,7 +29,7 @@ const Login = () => {
 	}
 
 	return (
-		<div className='flex flex-col justify-center items-center gap-[32px]'>
+		<div className='flex flex-col justify-center w-full h-screen items-center gap-[32px]'>
 			<div className='flex flex-col justify-center items-center gap-[12px]'>
 				<Image src='/logo.svg' width='72' height='72' alt='site logo' />
 				<h1 className='text-[#59C235] text-[40px] font-inter font-normal leading-[38px]'>

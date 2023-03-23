@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import Nav from '@/components/Header/Nav'
 
-const noAuthRequired = ['/', '/login', '/signup']
+const noAuthRequired = ['/', '/login', '/signup', '/bases']
 
 const App = ({ Component, pageProps }) => {
 	const router = useRouter()

@@ -26,7 +26,7 @@ const Home = () => {
 			<Head>
 				<title>Tour Journey</title>
 			</Head>
-			{user ? user.email + '' : ''}
+			{user ? user.uid + '' : ''}
 			<h1
 				onClick={async () => {
 					const result = await addData('name', 'emailhui', user.uid)

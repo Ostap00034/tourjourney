@@ -9,22 +9,23 @@ const Nav = () => {
 
 	return (
 		<nav className='bg-red-500'>
-			<div>
-				<Link href='/'>Main</Link>
+			<div className='flex flex-row justify-around px-10 py-5'>
+				<Link href='/'>Главная</Link>
 				{user ? (
 					<div>
 						<a
+							className='cursor-pointer'
 							onClick={() => {
 								logout()
 								router.push('/login')
 							}}>
-							Logout
+							Выйти
 						</a>
 					</div>
 				) : (
 					<>
-						<Link href='/signup'>Reg</Link>
-						<Link href='/login'>Auth</Link>
+						<Link href='/signup'>Регистрация</Link>
+						<Link href='/login'>Авторизация</Link>
 					</>
 				)}
 			</div>

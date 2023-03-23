@@ -3,20 +3,14 @@ import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { storage } from '@/firebase/config/firebase'
-import {
-	getDownloadURL,
-	uploadBytesResumable,
-	ref,
-	uploadBytes,
-} from 'firebase/storage'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { AddBases } from '@/firebase/realtimedatabase/database'
-import cuid from 'cuid'
+const { uuid } = require('uuidv4')
 
 const AddBase = () => {
 	const { user } = useAuth()
 	const router = useRouter()
 
-	const [progress, setProgress] = useState(0)
 	const [urls, setUrls] = useState([])
 
 	const [data, setData] = useState({
@@ -34,12 +28,13 @@ const AddBase = () => {
 		router.push('/login')
 	}
 
-	const uploadFile = async imageUpload => {
-		const storageRef = ref(storage, `bases/${cuid()}`)
+	const uploadFile = imageUpload => {
+		const storageRef = ref(storage, `bases/${uuid()}`)
 		if (imageUpload == null) return
-		await uploadBytes(storageRef, imageUpload).then(snapshot => {
-			getDownloadURL(snapshot.ref)
+		uploadBytes(storageRef, imageUpload).then(async snapshot => {
+			await getDownloadURL(snapshot.ref)
 				.then(url => {
+					console.log(url)
 					setUrls(prev => [...prev, url])
 				})
 				.catch(err => console.log(err))
@@ -47,28 +42,27 @@ const AddBase = () => {
 	}
 
 	const handleBase = async e => {
-		const storageRef = ref(storage, `bases/${cuid()}`)
 		e.preventDefault()
-		try {
-			for (var i = 0; i < data?.images.length; ++i) {
-				uploadFile(data.images[i])
-				console.log(data.images[i])
+		for (var i = 0; i < data?.images.length; ++i) {
+			setTimeout(uploadFile(data.images[i]), 3000)
+			if (i === data?.images.length - 1) {
+				console.log(JSON.parse(JSON.stringify(urls)))
+				setTimeout(
+					AddBases(
+						data.title,
+						data.location,
+						data.description,
+						Object(urls).map(key => ({ ...urls[key], [key]: key })),
+						user.uid,
+						data.categorie1,
+						data.categorie2,
+						data.categorie3,
+						data.categorie4
+					),
+					2000
+				)
+				router.push('/')
 			}
-
-			const result = AddBases(
-				data.title,
-				data.location,
-				data.description,
-				user.uid,
-				urls,
-				data.categorie1,
-				data.categorie2,
-				data.categorie3,
-				data.categorie4
-			)
-			console.log(result)
-		} catch (err) {
-			console.log(err)
 		}
 	}
 
@@ -83,7 +77,6 @@ const AddBase = () => {
 
 			<h1 className='font-inter font-medium text-[30px] text-[#0F1C2A] leading-[38px]'>
 				Регистрация туристического объекта
-				{progress}
 			</h1>
 			<form
 				className='flex flex-col justify-center items-start'
